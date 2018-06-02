@@ -1,12 +1,30 @@
-<!-- Learn about this code on MDN: https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation -->
-
-<header>
-  <link rel="stylesheet" href="style.css">
-</header>
-<div class="garden">
-  <div class="ball"></div>
-</div>
-
-<pre class="output"></pre>
-
-<script src="script.js"></script>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Bussola</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width, user-scalable=no"/>
+        <style>
+            html,body { margin: 0; padding: 0; height: 100% }
+            div { min-height: 100%;}
+            img { position: absolute; top: 50%; left: 50%; margin: -160px}
+        </style>
+    </head>
+    <body>
+        <div><img src="bussola1.png"/></div>
+        
+        <script>
+            var div = document.getElementsByTagName("div")[0];
+            var img = div.childNodes[0];
+            
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener("deviceorientation", function(evt) {
+                    img.style.webkitTransform = "rotateZ(" + evt.alpha + "deg)";
+                    img.style.transform = "rotateZ(" + evt.alpha + "deg)";
+                }, false);
+            } else {
+                alert("Browser nao suporta device orientation");
+            }
+            
+        </script>
+    </body>
+</html>
